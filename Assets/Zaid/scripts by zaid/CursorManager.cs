@@ -5,7 +5,7 @@ public class CursorManager : MonoBehaviour
     public Sprite idleSprite, clickableSprite, pressingClickableSprite;
     private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
-
+    public bool notParalyzed = true; // controlled by insects
     public float minMovableGrass, maxMovableGrass;
     private GameObject clickableObject;
     private Vector2 initialCursorPos;
@@ -25,7 +25,7 @@ public class CursorManager : MonoBehaviour
         Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = cursorPosition;
 
-        if (isClickable)
+        if (isClickable && notParalyzed)
         {
             if (Input.GetMouseButtonDown(0))
             {

@@ -32,10 +32,17 @@ public class InsectController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            speed = 0;
             insectAnimator.CrossFade("BITE",0f);
-            collision.GetComponent<Animator>().CrossFade("OUCH", 0f);
-            Destroy(gameObject, 1f);
+            GameObject.Find("player body").GetComponent<Animator>().CrossFade("OUCH", 0f); // f it shitty ass code
+            GameObject.Find("cursor").GetComponent<CursorManager>().notParalyzed = false;
+            Invoke("delay",1.2f);
+            Destroy(gameObject, 1.4f);
         }
+    }
+    private void delay()
+    {
+        GameObject.Find("cursor").GetComponent<CursorManager>().notParalyzed = true;
     }
     public void Killed()
     {
