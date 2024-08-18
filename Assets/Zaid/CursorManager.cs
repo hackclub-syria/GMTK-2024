@@ -6,6 +6,7 @@ public class CursorManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
 
+    public float minMovableGrass, maxMovableGrass;
     void Start()
     {
         Cursor.visible = false;
@@ -38,6 +39,13 @@ public class CursorManager : MonoBehaviour
         if (collision.CompareTag("Clickable"))
         {
             isClickable = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Clickable"))
+        {
+            collision.gameObject.transform.position = new Vector3(0, 0, 0);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
