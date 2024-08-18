@@ -352,8 +352,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475081540}
-  m_LocalRotation: {x: 0, y: 0, z: 0.2294552, w: 0.97331923}
-  m_LocalPosition: {x: 0.44467157, y: 0.37638187, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.22812933, w: 0.97363085}
+  m_LocalPosition: {x: 0.398, y: 0.216, z: 0}
   m_LocalScale: {x: 1.0132139, y: 0.9673992, z: 0.55872345}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -741,6 +741,8 @@ MonoBehaviour:
   idleSprite: {fileID: -1385434779, guid: f5ed50faa452c414b83c2bf72705ea42, type: 3}
   clickableSprite: {fileID: 762755505, guid: f5ed50faa452c414b83c2bf72705ea42, type: 3}
   pressingClickableSprite: {fileID: -481859320, guid: f5ed50faa452c414b83c2bf72705ea42, type: 3}
+  minMovableGrass: 3.8
+  maxMovableGrass: 4.815
 --- !u!1 &1944134258
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9630623, y: 0.536}
+  m_AnchoredPosition: {x: 1.239, y: 0.536}
   m_SizeDelta: {x: 3, y: 0.4375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &2063251796
