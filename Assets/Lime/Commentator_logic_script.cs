@@ -11,7 +11,7 @@ public class Commentator_logic_script : MonoBehaviour
     public TMP_Text Comment_text;
 
     // Array of possible idle comments
-    public string[] idleComments = new string[]
+    private string[] idleComments = new string[]
     {
         "Just another day...",
         "I wonder what's for dinner.",
@@ -25,13 +25,13 @@ public class Commentator_logic_script : MonoBehaviour
         "Time to get back to work."
     };
 
-    private float idleCommentInterval = 5f; // Time in seconds between idle comments
-    private float timer; // Timer to track elapsed time
+    private float Comment_interval = 5f;
+    private float timer; 
 
     void Start()
     {
         Current_state = State.Idle;
-        timer = idleCommentInterval; // Set initial timer value to the interval
+        timer = Comment_interval; 
     }
 
     void Update()
@@ -39,9 +39,10 @@ public class Commentator_logic_script : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
-            int randomIndex = Random.Range(0, idleComments.Length);
-            string randomComment = idleComments[randomIndex];
-            Comment(randomComment, State.Idle);
+            Current_state = State.Idle;
+            int Rand_ind = Random.Range(0, idleComments.Length);
+            Comment(idleComments[Rand_ind], State.Idle);
+            timer = Comment_interval;
         }
     
         switch (Current_state)
@@ -69,6 +70,7 @@ public class Commentator_logic_script : MonoBehaviour
         UnityEngine.Debug.Log(comment);
         Comment_text.SetText(comment);
         Current_state = New_state;
+        timer = Comment_interval;
     }
 
     [ContextMenu("Test Comment Function")]
