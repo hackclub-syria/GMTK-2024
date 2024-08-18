@@ -8,6 +8,7 @@ public class sMainMenu : MonoBehaviour
     
     public GameObject MainMenu;
     public GameObject OptionsMenu;
+    public GameObject LeaderboardMenu;
 
     // load next scene
     public void Play()
@@ -20,6 +21,12 @@ public class sMainMenu : MonoBehaviour
     {
         MainMenu.SetActive(false);
         OptionsMenu.SetActive(true);
+    }
+
+    public void ViewLeaderboard()
+    {
+        MainMenu.SetActive(false);
+        LeaderboardMenu.SetActive(true);
     }
 
     // quit game
