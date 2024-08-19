@@ -49,7 +49,6 @@ public class InsectController : MonoBehaviour
     {
         Instantiate(dust, transform.position, Quaternion.identity);
         speed = 0;
-        insectAnimator.CrossFade("BITE", 0f);
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject);
     }
 }
