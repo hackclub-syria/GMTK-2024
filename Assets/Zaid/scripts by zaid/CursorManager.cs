@@ -44,6 +44,7 @@ public class CursorManager : MonoBehaviour
                 clickableObject.transform.position = new Vector2(newX, clickableObject.transform.position.y);
                 normalizedPosition = (newX - minMovableGrass) / (maxMovableGrass - minMovableGrass);
                 golfLogicManager.holeRadius = normalizedPosition * golfLogicManager.maxHoleRadius;
+                UpdateSusAmount(normalizedPosition);
             }
             else
             {
@@ -93,6 +94,21 @@ public class CursorManager : MonoBehaviour
         if (collision.gameObject.name.Contains("insect"))
         {
             isInsect = false;
+        }
+    }
+    public void UpdateSusAmount(float normalizedPosition)
+    {
+        if (normalizedPosition < 0.4f)
+        {
+            golfLogicManager.susAmountToAdd = Mathf.Clamp01((0.4f - normalizedPosition) / 0.3f);
+        }
+        else if (normalizedPosition > 0.6f)
+        {
+            golfLogicManager.susAmountToAdd = Mathf.Clamp01((normalizedPosition - 0.6f) / 0.3f);
+        }
+        else
+        {
+            golfLogicManager.susAmountToAdd = 0f;
         }
     }
 }

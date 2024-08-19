@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatScreenScript : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class StatScreenScript : MonoBehaviour
     public GameObject[] joeScoreSpots;
 
     public Sprite miss, score, blank;
-
+    public Slider susSlider;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +74,10 @@ public class StatScreenScript : MonoBehaviour
 
     public void UpdateSusUI(float level)
     {
-
+        susSlider.value = Mathf.RoundToInt(level);
+        if (susSlider.value == 11)
+        {
+            print("WTF SO SUSSSY BAKAAA");
+        }
     }
 }

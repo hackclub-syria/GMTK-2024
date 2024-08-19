@@ -30,7 +30,12 @@ public class TopDownGlobalScript : MonoBehaviour
     public Text roundNumberText;
     [Header("* Other")]
     public float holeRadius;
-
+    public float susAmountToAdd;
+    public float sus;
+    public float timeBetweenSusUpdate;
+    public float susIncreaseFactor;
+    public float timerSus;
+    public float naturalSusDecrease;
     // Start is called before the first frame update
     void Awake()
     {
@@ -38,11 +43,25 @@ public class TopDownGlobalScript : MonoBehaviour
         holeRadius = 0.5f;
         difficulty = prevDifficulty = 1;
         stats = GameObject.FindGameObjectWithTag("UI Manager").GetComponent<StatScreenScript>();
+        timerSus = timeBetweenSusUpdate;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (timerSus > 0) { timerSus -= Time.deltaTime; }
+        else
+        {
+            timerSus = timeBetweenSusUpdate;
+            if (susAmountToAdd > 0){
+                sus += susAmountToAdd* susIncreaseFactor;
+            }
+            else
+            {
+                sus = Mathf.Clamp(sus - naturalSusDecrease, 0, 11);
+            }
+            UpdateSus(sus);
+        }
         if (difficulty != prevDifficulty)
         {
             ballMoveSpeed += (difficulty - prevDifficulty) * ballSpeedIncreaseRate;
