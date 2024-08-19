@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Clickable
   - Insect
+  - Logic
+  - UI Manager
   layers:
   - Default
   - TransparentFX
