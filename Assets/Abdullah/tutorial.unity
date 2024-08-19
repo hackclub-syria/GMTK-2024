@@ -173,10 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a25acf778f9f0b4985143b11185fece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texts:
-  - text 1
-  - text 2
-  - text 3
 --- !u!114 &931144005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +195,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -319,10 +315,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8256290cad4e2d346a74e99e8b4597fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  texts:
+  - once there was a big man having  a nap
+  - he woke up
+  - and had a shit
   imgs:
   - {fileID: 21300000, guid: ad7258a279f914b4a9378ac74b0d71fe, type: 3}
   - {fileID: 21300000, guid: 99272c0cacf532a4d86f3dd941cc0526, type: 3}
   - {fileID: 21300000, guid: e41ae13c0364f4b4fad9944fe827d45c, type: 3}
+  index: 0
 --- !u!212 &961436146
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -35,7 +35,10 @@ public class BallScript : MonoBehaviour
     {
         ballMoveSpeed = logic.ballMoveSpeed;
         transform.position += ballMoveSpeed * Time.deltaTime * dir;
-        if (math.abs(transform.position.x) >= 2.61f || math.abs(transform.position.y) >= 1.51f)
+        if (transform.position.x > logic.corners[3].position.x || // Check right boundary
+            transform.position.x < logic.corners[0].position.x || // Check left boundary
+            transform.position.y > logic.corners[0].position.y || // Check top boundary
+            transform.position.y < logic.corners[1].position.y)   // Check bottom boundary
         {
             DestroyBall();
         }
@@ -47,7 +50,7 @@ public class BallScript : MonoBehaviour
 
     public void DestroyBall()
     {
-        Destroy(gameObject);
         logic.ballExists = false;
+        Destroy(gameObject);
     }
 }

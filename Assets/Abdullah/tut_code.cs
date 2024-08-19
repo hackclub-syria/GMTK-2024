@@ -7,7 +7,7 @@ public class tut_code : MonoBehaviour
 {
     public string[] texts;
     public Sprite[] imgs;
-    int index = 0;
+    public int index = 0;
     // Start is called before the first frame update
     void Start()
     {

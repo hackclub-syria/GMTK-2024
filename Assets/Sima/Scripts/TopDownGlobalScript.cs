@@ -7,7 +7,7 @@ public class TopDownGlobalScript : MonoBehaviour
 {
     [Header("Properties")]
     public float ballRadius;
-    public float[] SpawnCornersX, SpawnCornersY;
+    public Transform[] corners;
     [Space][Space]
     [Header("Debug Values")]
     [Header("* Ball")]
@@ -24,7 +24,7 @@ public class TopDownGlobalScript : MonoBehaviour
     public float holeRadius;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ballExists = false;
         holeRadius = 0.5f;

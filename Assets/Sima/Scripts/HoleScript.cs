@@ -27,7 +27,8 @@ public class HoleScript : MonoBehaviour
         if (collision.gameObject.layer == 3 && holeRadius >= logic.ballRadius)
         {
             BallScript ballScript = collision.gameObject.GetComponent<BallScript>();
-            ballScript.DestroyBall();
+            logic.ballExists = false;
+            Destroy(collision.gameObject); // we should change this to: shrink then destroy
             logic.scoreCountInThisRound[ballScript.ballBelongsToTeam]++;
             if (logic.scoreCountInThisRound[1] == 5)
             {

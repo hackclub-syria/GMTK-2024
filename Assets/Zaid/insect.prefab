@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnedLeft: 0
-  speed: 1
+  speed: 0.5
   insectAnimator: {fileID: 8766398701783057484}
   dust: {fileID: 2877067272277696220, guid: 606762d0f689de04bbb88aba78f661a4, type: 3}
 --- !u!61 &3693899921348290952

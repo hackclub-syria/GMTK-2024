@@ -5,7 +5,7 @@ using UnityEngine;
 public class InsectController : MonoBehaviour
 {
     public bool SpawnedLeft;
-    public int speed;
+    public float speed;
     private SpriteRenderer sr;
     public Animator insectAnimator;
     public GameObject dust;
