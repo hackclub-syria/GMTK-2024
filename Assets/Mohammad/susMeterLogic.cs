@@ -1,3 +1,10 @@
+// each time susMeter is called it chnges the value of the susSlider and susValue 
+// to change crowds sensitivity for change change crowdIQ
+
+
+
+
+
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -7,8 +14,8 @@ using UnityEngine.UI;
 public class susMeterLogic : MonoBehaviour
 {
     public Slider susSlider;
-    public float crowdIQ;
-    public float susValue;
+    public float crowdIQ = 0.5f;
+    public float susValue = 0;
     
    public void changeSusValue(float susChange){
     susValue += susChange;
