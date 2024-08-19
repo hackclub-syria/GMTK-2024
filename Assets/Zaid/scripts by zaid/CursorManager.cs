@@ -6,7 +6,7 @@ public class CursorManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
     public bool notParalyzed = true;
-    private bool isInsect=false;
+    public bool isInsect=false;
     public float minMovableGrass, maxMovableGrass;
     private GameObject clickableObject;
     private Vector2 initialCursorPos;
@@ -51,17 +51,18 @@ public class CursorManager : MonoBehaviour
                 spriteRenderer.sprite = clickableSprite;
             }
         }
-        else if (isClickable && notParalyzed && isInsect)
+        else if (notParalyzed && isInsect)
         {
             spriteRenderer.sprite = clickableSprite;
             if (Input.GetMouseButtonDown(0))
             {
+                spriteRenderer.sprite = idleSprite;
                 insectTouched.GetComponent<InsectController>().Killed();
             }
-            else
-            {
-                spriteRenderer.sprite = idleSprite;
-            }
+        }
+        else
+        {
+            spriteRenderer.sprite = idleSprite;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -89,6 +90,10 @@ public class CursorManager : MonoBehaviour
             isClickable = false;
             isInsect = false;
             clickableObject = null;
+        }
+        if (collision.gameObject.name.Contains("insect"))
+        {
+            isInsect = false;
         }
     }
 }
