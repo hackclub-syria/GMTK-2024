@@ -10,28 +10,45 @@ public class Commentator_logic_script : MonoBehaviour
     public SpriteRenderer Com_sprite;
     public TMP_Text Comment_text;
 
-    // Array of possible idle comments
-    public string[] idleComments = new string[]
+    private string[] Idle_comments = new string[]
     {
-        "Just another day...",
+        "Top o' the mornin' to ya laddies!",
         "I wonder what's for dinner.",
-        "Do you think it will rain today?",
-        "I could use a coffee right now.",
-        "Is it time for a break yet?",
-        "I need to finish this task.",
-        "I hope everything goes well.",
-        "Maybe I should check my emails.",
-        "Is it almost lunchtime?",
-        "Time to get back to work."
+        "What's the craic?",
+        "failing means yer playin!",
+        "Where's the jacks?",
+        "Yer erse is in the wey",
+        "2 pints are better than one",
+        "I am both scottish and irish, half guinness half whiskey!",
+        "GIE IT LALDY!",
+        "GIVE IT A LASH!."
+    };
+    private string[] Surprised_comments = new string[]
+    {
+        "Great Scot!",
+        "Oi swear by me father's tammie!",
+        "Jaysus!",
+        "smoother than a pint of Guinness on St. Paddy’s Day!",
+        "Well, blow me bagpipes",
+        "Well, paint me green and call me Nessie!",
+        "Would you look at that! As surprising as a sunny day in both Dublin and Glasgow!"
+    };
+    private string[] Sus_comments = new string[]
+    {
+        "That’s fishy, like haggis in an Irish stew",
+        "y ever get that feeling when the bagpipes play an odd note? Aye, that’s the feeling I’ve got now.!",
+        "JaySUS...",
+        "I don’t trust that hole... not one bit.",
+        "Did that hole just move, or is it the whisky?"
     };
 
-    private float idleCommentInterval = 5f; // Time in seconds between idle comments
-    private float timer; // Timer to track elapsed time
+    private float Comment_interval = 5f;
+    private float timer; 
 
     void Start()
     {
         Current_state = State.Idle;
-        timer = idleCommentInterval; // Set initial timer value to the interval
+        timer = Comment_interval; 
     }
 
     void Update()
@@ -39,9 +56,10 @@ public class Commentator_logic_script : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
-            int randomIndex = Random.Range(0, idleComments.Length);
-            string randomComment = idleComments[randomIndex];
-            Comment(randomComment, State.Idle);
+            Current_state = State.Idle;
+            int Rand_ind = Random.Range(0, Idle_comments.Length);
+            Comment(Idle_comments[Rand_ind], State.Idle);
+            timer = Comment_interval;
         }
     
         switch (Current_state)
@@ -69,8 +87,26 @@ public class Commentator_logic_script : MonoBehaviour
         UnityEngine.Debug.Log(comment);
         Comment_text.SetText(comment);
         Current_state = New_state;
+        timer = Comment_interval;
     }
-
+    [ContextMenu("Surprise_com")]
+    void Surprise_com()
+    {
+        int Rand_ind = Random.Range(0, Surprised_comments.Length);
+        Comment(Surprised_comments[Rand_ind], State.Surprised);
+    }
+    [ContextMenu("V_surprise_com")]
+    void V_surprise_com()
+    {
+        int Rand_ind = Random.Range(0, Surprised_comments.Length);
+        Comment(Surprised_comments[Rand_ind], State.V_surprised);
+    }
+    [ContextMenu("Sus_com")]
+    void Sus_com()
+    {
+        int Rand_ind = Random.Range(0, Sus_comments.Length);
+        Comment(Sus_comments[Rand_ind], State.Sus);
+    }
     [ContextMenu("Test Comment Function")]
     public void TestComment()
     {
