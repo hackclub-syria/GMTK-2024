@@ -49,4 +49,9 @@ public class sGamePaused : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void restartGame()
+    {
+        // ADD CODE HERE FOR RESTARTING THE GAME
+    }
 }
