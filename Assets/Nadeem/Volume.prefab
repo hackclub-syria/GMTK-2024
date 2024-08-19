@@ -2004,6 +2004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dca18b6a4c265549b9f977e5fc43e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 8d4aff5a067723d45bcba199ca06b41b, type: 2}
   masterVol: {fileID: 6969164474408640632}
   SFXVol: {fileID: 6969164474610439414}
   CommVol: {fileID: 6969164473280297837}
