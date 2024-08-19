@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class scoreLogicScript : MonoBehaviour
 {
-    public int roundNumber;
-    //keeps trak of the number of the ball in each round
+    ////keeps trak of the number of the ball in each round
     private int ballInRoundNumber;
+    //When number of ballInRoundNumber hits 5 increases round number and zeros enemy and player's score
+    public int roundNumber = 0;
+    public int roundWon = 0;
+
+    
     public Sprite indecatorOn;
     public Sprite indecatorOff;
     public int playerScore = 0;
@@ -24,11 +28,23 @@ public class scoreLogicScript : MonoBehaviour
         playerScore += addedScore;
         ballInRoundNumber += 1;
         numberOfPlayerOnIndicators(playerScore);
+        if(ballInRoundNumber > 5){
+            ballInRoundNumber = 0;
+            roundNumber += 1;
+            roundWon += 1;
+            playerScore = 0;
+            enemyScore = 0;
+
+        }
     }
     public void addenemyScore(int addedScore){
         enemyScore += addedScore;
          ballInRoundNumber += 1;
         numberOfEnemyOnIndicators(enemyScore);
+        if(ballInRoundNumber > 5){
+
+            roundNumber += 1;
+        }
         
 
     }
