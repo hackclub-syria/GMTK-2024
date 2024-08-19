@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &18492082
 Canvas:
   m_ObjectHideFlags: 0
@@ -190,8 +190,8 @@ Canvas:
   m_GameObject: {fileID: 18492079}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 2
+  m_Camera: {fileID: 1575115812}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -210,20 +210,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18492079}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.002857143, y: 0.002857143, z: 2.4017859}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 871259786}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1351485789}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1.9714286, y: -2}
+  m_SizeDelta: {x: 800, y: 449.66544}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &871259785
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +425,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351485787
 GameObject:
@@ -486,7 +486,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b6d7bf9e4f83a584eb64b3aaa02c8654, type: 3}
+  m_Sprite: {fileID: -2079804250, guid: 3e725f73a40c4024dab832935fc75b8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -505,10 +505,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351485787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.61, y: -0.32, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 18492083}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -525,23 +526,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Current_state: 0
-  Idle_sprite: {fileID: 21300000, guid: b6d7bf9e4f83a584eb64b3aaa02c8654, type: 3}
-  Surprised_sprite: {fileID: 21300000, guid: 8046f1154fdb2bd4bb58f5b6058bfa28, type: 3}
-  V_surprised_sprite: {fileID: 21300000, guid: d81c6898553a2c24389344e8007947ac, type: 3}
-  Sus_sprite: {fileID: 21300000, guid: 84a5c9aa4c8e8034395f2afacbc51694, type: 3}
+  Idle_sprite: {fileID: -2079804250, guid: 3e725f73a40c4024dab832935fc75b8b, type: 3}
+  Surprised_sprite: {fileID: 220321297, guid: 3e725f73a40c4024dab832935fc75b8b, type: 3}
+  V_surprised_sprite: {fileID: 1979683871, guid: 3e725f73a40c4024dab832935fc75b8b, type: 3}
+  Sus_sprite: {fileID: 552543150, guid: 3e725f73a40c4024dab832935fc75b8b, type: 3}
   Com_sprite: {fileID: 1351485788}
   Comment_text: {fileID: 871259787}
-  idleComments:
-  - Just another day...
-  - I wonder what's for dinner.
-  - Do you think it will rain today?
-  - I could use a coffee right now.
-  - Is it time for a break yet?
-  - I need to finish this task.
-  - I hope everything goes well.
-  - Maybe I should check my emails.
-  - Is it almost lunchtime?
-  - Time to get back to work.
 --- !u!1 &1575115810
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,15 +578,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.023774145
+    y: 0.023809522
+    width: 0.9509658
+    height: 0.9523809
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 0.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -608,7 +598,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -642,8 +632,8 @@ MonoBehaviour:
   m_AssetsPPU: 50
   m_RefResolutionX: 160
   m_RefResolutionY: 90
-  m_UpscaleRT: 0
+  m_UpscaleRT: 1
   m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
+  m_CropFrameX: 1
+  m_CropFrameY: 1
   m_StretchFill: 0
