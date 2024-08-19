@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class tut_code : MonoBehaviour
 {
@@ -11,8 +10,8 @@ public class tut_code : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<TextMeshProUGUI>().text = texts[index];
-        gameObject.GetComponent<SpriteRenderer>().sprite = imgs[index];
+        gameObject.GetComponentInChildren<Text>().text = texts[index];
+        gameObject.GetComponent<Image>().sprite = imgs[index];
         
     }
 
@@ -23,8 +22,8 @@ public class tut_code : MonoBehaviour
 
             if(index < imgs.Length - 1){
                 ++index;
-                gameObject.GetComponent<SpriteRenderer>().sprite = imgs[index];
-                gameObject.GetComponent<TextMeshProUGUI>().text = texts[index];
+                gameObject.GetComponent<Image>().sprite = imgs[index];
+                gameObject.GetComponentInChildren<Text>().text = texts[index];
             }else{
                 Destroy(this.gameObject);
             }
