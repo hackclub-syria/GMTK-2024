@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: d6cd41d10e71a04458158ab6f418d238, type: 3}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -203,7 +203,7 @@ Transform:
   m_GameObject: {fileID: 430338806}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.127, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logic: {fileID: 0}
-  holeRadius: 0
+  holeRadius: 2
 --- !u!58 &430338811
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -236,9 +236,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: 0.03}
+  m_Offset: {x: 0.0032571256, y: -0.003285423}
   serializedVersion: 2
-  m_Radius: 0.34
+  m_Radius: 0.09149741
 --- !u!50 &430338812
 Rigidbody2D:
   serializedVersion: 4
@@ -525,6 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2281771b444f1a344941b7eb09629903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballRadius: 1.5
   SpawnCornersX:
   - -2.6
   - -2.6
@@ -536,13 +537,13 @@ MonoBehaviour:
   - -1.5
   - 1.5
   ballMoveSpeed: 1
-  holeRadius: 1
   ballExists: 0
-  difficulty: 1
   ballSpeedIncreaseRate: 0.5
   ballCountInThisRound: 0
   scoreCountInThisRound: 000000000000000000000000
+  difficulty: 1
   roundsWon: 0
+  holeRadius: 2
 --- !u!4 &1541370856
 Transform:
   m_ObjectHideFlags: 0
@@ -604,15 +605,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.06756757
+    y: 0.067307696
+    width: 0.8648649
+    height: 0.86538464
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.1007919
+  orthographic size: 2.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -624,7 +625,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -658,7 +659,7 @@ MonoBehaviour:
   m_AssetsPPU: 16
   m_RefResolutionX: 160
   m_RefResolutionY: 90
-  m_UpscaleRT: 0
+  m_UpscaleRT: 1
   m_PixelSnapping: 0
   m_CropFrameX: 1
   m_CropFrameY: 1

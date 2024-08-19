@@ -5,16 +5,24 @@ using UnityEngine;
 
 public class TopDownGlobalScript : MonoBehaviour
 {
+    [Header("Properties")]
+    public float ballRadius;
     public float[] SpawnCornersX, SpawnCornersY;
+    [Space][Space]
+    [Header("Debug Values")]
+    [Header("* Ball")]
     public float ballMoveSpeed;
-    public float holeRadius;
     public bool ballExists;
-    public int difficulty;
-    private int prevDifficulty;
     public float ballSpeedIncreaseRate;
     public int ballCountInThisRound;
+    [Header("* Round")]
     public int[] scoreCountInThisRound = { 0, 0, 0 }; // first index is not actually used
+    private int prevDifficulty;
+    public int difficulty;
     public int roundsWon;
+    [Header("* Other")]
+    public float holeRadius;
+
     // Start is called before the first frame update
     void Start()
     {

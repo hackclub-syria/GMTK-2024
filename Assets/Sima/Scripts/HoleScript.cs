@@ -17,14 +17,14 @@ public class HoleScript : MonoBehaviour
         if (logic.holeRadius != holeRadius)
         {
             holeRadius = logic.holeRadius;
-            transform.localScale = new Vector3(0.5f * holeRadius, 0.5f * holeRadius, 1f);
+            transform.localScale = new Vector3(holeRadius, holeRadius, 1f);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collision happened");
-        if (collision.gameObject.layer == 3 && holeRadius >= 0.5)
+        if (collision.gameObject.layer == 3 && holeRadius >= logic.ballRadius)
         {
             BallScript ballScript = collision.gameObject.GetComponent<BallScript>();
             ballScript.DestroyBall();
