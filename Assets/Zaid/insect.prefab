@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8766398701783057484}
   m_Layer: 0
   m_Name: insect
-  m_TagString: Insect
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   SpawnedLeft: 0
   speed: 1
   insectAnimator: {fileID: 8766398701783057484}
+  dust: {fileID: 2877067272277696220, guid: 606762d0f689de04bbb88aba78f661a4, type: 3}
 --- !u!61 &3693899921348290952
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.23998636}
+  m_Offset: {x: -0.096758604, y: -0.041093588}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5200273}
+  m_Size: {x: 1.4945438, y: 0.9178128}
   m_EdgeRadius: 0
 --- !u!95 &8766398701783057484
 Animator:

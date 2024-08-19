@@ -5,12 +5,13 @@ public class CursorManager : MonoBehaviour
     public Sprite idleSprite, clickableSprite, pressingClickableSprite;
     private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
-    public bool notParalyzed = true; // controlled by insects
+    public bool notParalyzed = true;
+    private bool isInsect=false;
     public float minMovableGrass, maxMovableGrass;
     private GameObject clickableObject;
     private Vector2 initialCursorPos;
     private Vector2 initialObjectPos;
-
+    private GameObject insectTouched;
     private float normalizedPosition;
 
     void Start()
@@ -25,7 +26,7 @@ public class CursorManager : MonoBehaviour
         Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = cursorPosition;
 
-        if (isClickable && notParalyzed)
+        if (isClickable && notParalyzed && !isInsect)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -49,18 +50,34 @@ public class CursorManager : MonoBehaviour
                 spriteRenderer.sprite = clickableSprite;
             }
         }
-        else
+        else if (isClickable && notParalyzed && isInsect)
         {
-            spriteRenderer.sprite = idleSprite;
+            spriteRenderer.sprite = clickableSprite;
+            if (Input.GetMouseButtonDown(0))
+            {
+                insectTouched.GetComponent<InsectController>().Killed();
+            }
+            else
+            {
+                spriteRenderer.sprite = idleSprite;
+            }
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Clickable"))
         {
             isClickable = true;
             clickableObject = collision.gameObject;
+            if (collision.gameObject.name.Contains("insect"))
+            {
+                insectTouched = collision.gameObject;
+                isInsect = true;
+            }
+            else
+            {
+                isInsect = false;
+            }
         }
     }
 
@@ -69,6 +86,7 @@ public class CursorManager : MonoBehaviour
         if (collision.CompareTag("Clickable"))
         {
             isClickable = false;
+            isInsect = false;
             clickableObject = null;
         }
     }

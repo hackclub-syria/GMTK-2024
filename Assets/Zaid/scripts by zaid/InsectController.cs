@@ -8,6 +8,7 @@ public class InsectController : MonoBehaviour
     public int speed;
     private SpriteRenderer sr;
     public Animator insectAnimator;
+    public GameObject dust;
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -46,6 +47,9 @@ public class InsectController : MonoBehaviour
     }
     public void Killed()
     {
-        // play animation and destroy
+        Instantiate(dust, transform.position, Quaternion.identity);
+        speed = 0;
+        insectAnimator.CrossFade("BITE", 0f);
+        Destroy(gameObject, 0.1f);
     }
 }
