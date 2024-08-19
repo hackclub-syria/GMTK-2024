@@ -8,6 +8,8 @@ public class TopDownGlobalScript : MonoBehaviour
     [Header("Properties")]
     public float ballRadius;
     public float maxHoleRadius;
+    public float visionXMargin;
+    public float visionYMargin;
     public Transform[] corners;
     [Space][Space]
     [Header("Debug Values")]

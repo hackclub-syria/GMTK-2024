@@ -42,7 +42,11 @@ public class BallScript : MonoBehaviour
         {
             DestroyBall();
         }
-        if (gameObject.GetComponent<SpriteRenderer>().color != Color.white && math.abs(transform.position.x) <= 1.4f && math.abs(transform.position.y) <= 0.6f)
+        if (gameObject.GetComponent<SpriteRenderer>().color != Color.white 
+            &&( transform.position.x < logic.corners[3].position.x - logic.visionXMargin && // Check right boundary
+            transform.position.x > logic.corners[0].position.x + logic.visionXMargin && // Check left boundary
+            transform.position.y < logic.corners[0].position.y - logic.visionYMargin && // Check top boundary
+            transform.position.y > logic.corners[1].position.y + logic.visionYMargin))   // Check bottom boundary)
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
