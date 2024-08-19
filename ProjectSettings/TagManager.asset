@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Logic
+  - Clickable
+  - Insect
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ball
+  - 
   - Water
   - UI
   - 
