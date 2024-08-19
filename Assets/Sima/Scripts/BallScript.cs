@@ -41,9 +41,10 @@ public class BallScript : MonoBehaviour
             transform.position.y < logic.corners[1].position.y)   // Check bottom boundary
         {
             DestroyBall();
+            logic.UpdateScores(ballBelongsToTeam, false);
         }
-        if (gameObject.GetComponent<SpriteRenderer>().color != Color.white 
-            &&( transform.position.x < logic.corners[3].position.x - logic.visionXMargin && // Check right boundary
+        if (gameObject.GetComponent<SpriteRenderer>().color != Color.white
+            && (transform.position.x < logic.corners[3].position.x - logic.visionXMargin && // Check right boundary
             transform.position.x > logic.corners[0].position.x + logic.visionXMargin && // Check left boundary
             transform.position.y < logic.corners[0].position.y - logic.visionYMargin && // Check top boundary
             transform.position.y > logic.corners[1].position.y + logic.visionYMargin))   // Check bottom boundary)

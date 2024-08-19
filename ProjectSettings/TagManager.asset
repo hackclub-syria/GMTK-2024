@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Clickable
   - Insect
+  - Logic
+  - UI Manager
   layers:
   - Default
   - TransparentFX
@@ -42,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Text
+    uniqueID: 3443502863
     locked: 0

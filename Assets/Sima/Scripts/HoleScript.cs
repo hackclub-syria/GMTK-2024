@@ -29,18 +29,7 @@ public class HoleScript : MonoBehaviour
             BallScript ballScript = collision.gameObject.GetComponent<BallScript>();
             logic.ballExists = false;
             Destroy(collision.gameObject); // we should change this to: shrink then destroy
-            logic.scoreCountInThisRound[ballScript.ballBelongsToTeam]++;
-            if (logic.scoreCountInThisRound[1] == 5)
-            {
-                // round has been won by dad :)
-                logic.NewRound();
-            }
-            else if (logic.scoreCountInThisRound[2] == 5)
-            {
-                // round has been won by opponent ;-;
-                // stop spawning balls to prepare to exit
-                logic.ballExists = true;
-            }
+            logic.UpdateScores(ballScript.ballBelongsToTeam, true);
         }
     }
 
