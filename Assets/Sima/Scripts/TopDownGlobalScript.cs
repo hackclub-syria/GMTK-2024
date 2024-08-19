@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class TopDownGlobalScript : MonoBehaviour
@@ -26,9 +27,15 @@ public class TopDownGlobalScript : MonoBehaviour
     private int prevDifficulty;
     public int difficulty;
     public int roundsWon;
+    public Text roundNumberText;
     [Header("* Other")]
     public float holeRadius;
-
+    public float susAmountToAdd;
+    public float sus;
+    public float timeBetweenSusUpdate;
+    public float susIncreaseFactor;
+    public float timerSus;
+    public float naturalSusDecrease;
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,11 +43,25 @@ public class TopDownGlobalScript : MonoBehaviour
         holeRadius = 0.5f;
         difficulty = prevDifficulty = 1;
         stats = GameObject.FindGameObjectWithTag("UI Manager").GetComponent<StatScreenScript>();
+        timerSus = timeBetweenSusUpdate;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (timerSus > 0) { timerSus -= Time.deltaTime; }
+        else
+        {
+            timerSus = timeBetweenSusUpdate;
+            if (susAmountToAdd > 0){
+                sus += susAmountToAdd* susIncreaseFactor;
+            }
+            else
+            {
+                sus = Mathf.Clamp(sus - naturalSusDecrease, 0, 11);
+            }
+            UpdateSus(sus);
+        }
         if (difficulty != prevDifficulty)
         {
             ballMoveSpeed += (difficulty - prevDifficulty) * ballSpeedIncreaseRate;
@@ -50,6 +71,8 @@ public class TopDownGlobalScript : MonoBehaviour
 
     public void NewRound()
     {
+        roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
+        stats.ClearScoreBoard();
         ballCountInThisRound = 0;
         for (int i = 1; i <= 2; i++)
             for (int j = 0; j < 5; j++)
@@ -63,7 +86,10 @@ public class TopDownGlobalScript : MonoBehaviour
     }
     public void UpdateScores(int team, bool scored)
     {
-        scoreCountInThisRound[team]++;
+        if (scored)
+        {
+            scoreCountInThisRound[team]++;
+        }
         if (scoreCountInThisRound[1] == 5)
         {
             // round has been won by dad :)
@@ -71,6 +97,8 @@ public class TopDownGlobalScript : MonoBehaviour
         }
         else if (scoreCountInThisRound[2] == 5)
         {
+            // GAME OVER
+
             // round has been won by opponent ;-;
             // stop spawning balls to prepare to exit
             ballExists = true;
