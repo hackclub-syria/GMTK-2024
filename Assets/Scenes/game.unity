@@ -1434,6 +1434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballRadius: 1.5
   maxHoleRadius: 4.5
+  visionXMargin: 0.6
+  visionYMargin: 0.3
   corners:
   - {fileID: 1098162231}
   - {fileID: 1243877150}
