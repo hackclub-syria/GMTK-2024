@@ -9,12 +9,12 @@ public class StatScreenScript : MonoBehaviour
         {-1, -1, -1 , -1, -1},
         {-1, -1, -1 , -1, -1},
         {-1, -1, -1 , -1, -1},
-    }; // first row is not actually used
+    }; // first row is not actually used. ik bro ~zaid
 
     public GameObject[] dadScoreSpots;
     public GameObject[] joeScoreSpots;
 
-    public Sprite miss, score;
+    public Sprite miss, score, blank;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class StatScreenScript : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            if (scoresInThisRound[team, i] != -1)
+            if (scoresInThisRound[team, i] == -1)
             {
                 if (scored)
                 {
@@ -55,6 +55,19 @@ public class StatScreenScript : MonoBehaviour
 
                 break;
             }
+        }
+    }
+    public void ClearScoreBoard()
+    {
+        scoresInThisRound = new int[,] {
+            { -1, -1, -1 , -1, -1},
+        { -1, -1, -1 , -1, -1},
+        { -1, -1, -1 , -1, -1},
+    };
+        for (int i = 0; i < 5; i++)
+        {
+            dadScoreSpots[i].GetComponent<SpriteRenderer>().sprite = blank;
+            joeScoreSpots[i].GetComponent<SpriteRenderer>().sprite = blank;
         }
     }
 

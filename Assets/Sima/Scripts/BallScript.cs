@@ -16,7 +16,6 @@ public class BallScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Ball has been spawned");
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<TopDownGlobalScript>();
         hole = GameObject.Find("Hole");
         if (ballBelongsToTeam == 1)
@@ -34,6 +33,7 @@ public class BallScript : MonoBehaviour
     void Update()
     {
         ballMoveSpeed = logic.ballMoveSpeed;
+        // if its outside range, destroy it and report
         transform.position += ballMoveSpeed * Time.deltaTime * dir;
         if (transform.position.x > logic.corners[3].position.x || // Check right boundary
             transform.position.x < logic.corners[0].position.x || // Check left boundary
@@ -43,6 +43,7 @@ public class BallScript : MonoBehaviour
             DestroyBall();
             logic.UpdateScores(ballBelongsToTeam, false);
         }
+        // Make it white when it's in-range
         if (gameObject.GetComponent<SpriteRenderer>().color != Color.white
             && (transform.position.x < logic.corners[3].position.x - logic.visionXMargin && // Check right boundary
             transform.position.x > logic.corners[0].position.x + logic.visionXMargin && // Check left boundary

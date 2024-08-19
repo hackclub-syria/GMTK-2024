@@ -44,7 +44,6 @@ public class CursorManager : MonoBehaviour
                 clickableObject.transform.position = new Vector2(newX, clickableObject.transform.position.y);
                 normalizedPosition = (newX - minMovableGrass) / (maxMovableGrass - minMovableGrass);
                 golfLogicManager.holeRadius = normalizedPosition * golfLogicManager.maxHoleRadius;
-                Debug.Log("normalized pos: " + normalizedPosition);
             }
             else
             {
