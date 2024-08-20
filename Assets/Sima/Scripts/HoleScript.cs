@@ -23,16 +23,32 @@ public class HoleScript : MonoBehaviour
             transform.localScale = new Vector3(holeRadius, holeRadius, 1f);
         }
     }
-
+    public GameObject sound;
+    public AudioClip goodBol, badBol;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 2 && holeRadius >= logic.ballRadius)
         {
+
             BallScript ballScript = collision.gameObject.GetComponent<BallScript>();
             logic.ballExists = false;
             logic.UpdateScores(ballScript.ballBelongsToTeam, true);
+            if (ballScript.ballBelongsToTeam == 1)
+            {
+                PlaySound(goodBol);
+            }
+            else
+            {
+                PlaySound(badBol);
+            }
             Destroy(collision.gameObject); // we should change this to: shrink then destroy
         }
     }
-
+    public void PlaySound(AudioClip s)
+    {
+        GameObject _sound = Instantiate(sound);
+        _sound.GetComponent<AudioSource>().clip = s;
+        _sound.GetComponent<AudioSource>().Play();
+        Destroy(_sound, 5f);
+    }
 }

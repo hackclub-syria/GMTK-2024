@@ -1,7 +1,5 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class sGamePaused : MonoBehaviour
 {
@@ -27,9 +25,9 @@ public class sGamePaused : MonoBehaviour
                 pauseGame();
             }
         }
-
+        
     }
-
+    
     public void pauseGame()
     {
         pauseMenu.SetActive(true);
@@ -48,7 +46,7 @@ public class sGamePaused : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
+    
     public void restartGame()
     {
         SceneManager.LoadScene("game");

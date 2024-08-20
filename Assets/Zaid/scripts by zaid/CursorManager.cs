@@ -1,3 +1,5 @@
+
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CursorManager : MonoBehaviour
@@ -6,7 +8,7 @@ public class CursorManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
     public bool notParalyzed = true;
-    public bool isInsect = false;
+    public bool isInsect=false;
     public float minMovableGrass, maxMovableGrass;
     private GameObject clickableObject;
     private Vector2 initialCursorPos;
@@ -66,12 +68,22 @@ public class CursorManager : MonoBehaviour
             {
                 spriteRenderer.sprite = idleSprite;
                 insectTouched.GetComponent<InsectController>().Killed();
+                PlaySound(squash);
             }
         }
         else
         {
             spriteRenderer.sprite = idleSprite;
         }
+    }
+    public GameObject sfxObj;
+    public AudioClip squash;
+    public void PlaySound(AudioClip s)
+    {
+        GameObject _sound = Instantiate(sfxObj);
+        _sound.GetComponent<AudioSource>().clip = s;
+        _sound.GetComponent<AudioSource>().Play();
+        Destroy(_sound, 5f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

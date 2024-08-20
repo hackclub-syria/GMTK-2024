@@ -5,6 +5,7 @@ public class StatScreenScript : MonoBehaviour
 {
     private TopDownGlobalScript logic;
     public int scoreInThisRound = 0;
+    public Commentator_logic_script commentator;
     // first index is not actually used. ik bro ~zaid
 
     public SpriteRenderer[] dadScoreSpots;
@@ -19,6 +20,20 @@ public class StatScreenScript : MonoBehaviour
     {
         ClearScoreBoard();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<TopDownGlobalScript>();
+    }
+    public AudioLooper susLoopSound;
+    float updSusSoundTimer = 1, timeBetweenSusUpdate = 1;
+    private void Update()
+    {
+        if(updSusSoundTimer > 0)
+        {
+            updSusSoundTimer -= Time.deltaTime;
+        }
+        else
+        {
+            susLoopSound.PlayAudio(susSlider.value);
+            updSusSoundTimer = timeBetweenSusUpdate;
+        }
     }
 
     public void UpdateScoreUI(int team, bool scored)
@@ -68,6 +83,7 @@ public class StatScreenScript : MonoBehaviour
         }
     }
 
+    bool calledCommentator = false;
     public void UpdateSusUI(float level)
     {
         susSlider.value = Mathf.RoundToInt(level);
@@ -75,7 +91,16 @@ public class StatScreenScript : MonoBehaviour
         {
             logic.GameOver("sus");
         }
-        if (susSlider.value > 8)
+        if (susSlider.value > 6)
+        {
+            if (!calledCommentator)
+            {
+                commentator.Suspect();
+                calledCommentator = true;
+                Invoke("delayedCommentary", 5.2f);
+            }
+        }
+        if(susSlider.value > 8)
         {
             warning.SetActive(true);
         }
@@ -83,5 +108,9 @@ public class StatScreenScript : MonoBehaviour
         {
             warning.SetActive(false);
         }
+    }
+    void delayedCommentary()
+    {
+        calledCommentator = false;
     }
 }
