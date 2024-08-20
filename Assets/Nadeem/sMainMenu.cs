@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BayatGames.SaveGameFree;
 
 public class sMainMenu : MonoBehaviour
 {
@@ -13,7 +12,14 @@ public class sMainMenu : MonoBehaviour
     // load next scene
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SaveGame.Exists("playedTutorial")){
+            SceneManager.LoadScene("game");
+        }
+        else
+        {
+            SaveGame.Save<bool>("playedTutorial", true);
+            SceneManager.LoadScene("tutorial");
+        }
     }
 
     // go to options menu

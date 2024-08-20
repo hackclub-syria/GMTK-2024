@@ -23,7 +23,7 @@ public class HoleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 3 && holeRadius >= logic.ballRadius)
+        if (collision.gameObject.layer == 2 && holeRadius >= logic.ballRadius)
         {
             BallScript ballScript = collision.gameObject.GetComponent<BallScript>();
             logic.ballExists = false;

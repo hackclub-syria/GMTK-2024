@@ -324,17 +324,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
+  - Joe challenged your dad for a game of golf
+  - Your dad doesn't play golf.
+  - Your dad can't lose this game of golf.
   - You hid underground.
   - Balls from Dad should go in.
   - Balls from Joe should miss.
   - Beware of Insects.
   - Don't be sus.
   imgs:
+  - {fileID: 21300000, guid: c51ee81bfd10cdd4799067c8a3c1e285, type: 3}
+  - {fileID: 21300000, guid: a37bb5d16b8eb9e41b85955cc0c7e8a1, type: 3}
+  - {fileID: 21300000, guid: c241ac15077be1041860228061487178, type: 3}
   - {fileID: -1655745643, guid: b00f301b9b53f3843832c802e7c0e455, type: 3}
-  - {fileID: 524243021, guid: b00f301b9b53f3843832c802e7c0e455, type: 3}
   - {fileID: 524243021, guid: b00f301b9b53f3843832c802e7c0e455, type: 3}
   - {fileID: 177045972, guid: b00f301b9b53f3843832c802e7c0e455, type: 3}
   - {fileID: 1421850343, guid: b00f301b9b53f3843832c802e7c0e455, type: 3}
+  - {fileID: -1206393263, guid: b00f301b9b53f3843832c802e7c0e455, type: 3}
   index: 0
 --- !u!224 &961436146
 RectTransform:
