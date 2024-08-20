@@ -43,7 +43,6 @@ public class TopDownGlobalScript : MonoBehaviour
     void Awake()
     {
         ballExists = false;
-        holeRadius = 0.5f;
         difficulty = prevDifficulty = 1;
         stats = GameObject.FindGameObjectWithTag("UI Manager").GetComponent<StatScreenScript>();
         timerSus = timeBetweenSusUpdate;
@@ -99,23 +98,28 @@ public class TopDownGlobalScript : MonoBehaviour
     }
     public GameObject gameOverPanel;
     public TextMeshProUGUI yourScoreIsText;
+    public int ballsEnteredHole=0;
     public void UpdateScores(int team, bool scored)
     {
+        ballsEnteredHole++;
         if (scored)
         {
             scoreCountInThisRound[team]++;
         }
-        if (scoreCountInThisRound[1] == 5)
+        if (ballsEnteredHole==10)
         {
-            gameOverPanel.SetActive(true);
-            // round has been won by dad :)
-            NewRound();
+            if (scoreCountInThisRound[1] > scoreCountInThisRound[2])
+            {
+                // round has been won by dad :)
+                NewRound();
+            }
+            else
+            {
+                GameOver("round");
+            }
+            ballsEnteredHole = 0;
+        }
 
-        }
-        else if (scoreCountInThisRound[2] == 5)
-        {
-            GameOver();
-        }
         stats.UpdateScoreUI(team, scored);
     }
 
@@ -123,8 +127,18 @@ public class TopDownGlobalScript : MonoBehaviour
     {
         stats.UpdateSusUI(level);
     }
-    public void GameOver()
+    public Image losingReasonImg;
+    public Sprite sussySprite, roundLostSprite;
+    public void GameOver(string reason)
     {
+        if (reason == "round")
+        {
+            losingReasonImg.sprite = roundLostSprite;
+        }
+        else
+        {
+            losingReasonImg.sprite = sussySprite;
+        }
         // GAME OVER
         Cursor.visible = true;
         Destroy(roundCompletePanel);
@@ -144,8 +158,8 @@ public class TopDownGlobalScript : MonoBehaviour
             SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
             Leaderboards.Leaderboard.UploadNewEntry(SaveGame.Load<string>("username"), SaveGame.Load<int>("high score"));
         }
-        // round has been won by opponent ;-;
         // stop spawning balls to prepare to exit
         ballExists = true;
+        Time.timeScale = 0;
     }
 }

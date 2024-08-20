@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class CursorManager : MonoBehaviour
@@ -14,8 +15,10 @@ public class CursorManager : MonoBehaviour
     private GameObject insectTouched;
     private float normalizedPosition;
     public TopDownGlobalScript golfLogicManager;
+    public GameObject movableGrassObj;
     void Start()
     {
+        movableGrassObj.transform.position = new Vector3((maxMovableGrass + minMovableGrass) / 2, movableGrassObj.transform.position.y, movableGrassObj.transform.position.z);
         Cursor.visible = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = idleSprite;

@@ -18,8 +18,11 @@ public class StatScreenScript : MonoBehaviour
     public Sprite miss, score, blank;
     public Slider susSlider;
     // Start is called before the first frame update
+
+    public GameObject warning;
     void Start()
     {
+        ClearScoreBoard();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<TopDownGlobalScript>();
     }
 
@@ -77,7 +80,15 @@ public class StatScreenScript : MonoBehaviour
         susSlider.value = Mathf.RoundToInt(level);
         if (susSlider.value == 11)
         {
-            logic.GameOver();
+            logic.GameOver("sus");
+        }
+        if(susSlider.value > 8)
+        {
+            warning.SetActive(true);
+        }
+        else
+        {
+            warning.SetActive(false);
         }
     }
 }

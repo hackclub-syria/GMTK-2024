@@ -5,16 +5,16 @@ using UnityEngine;
 public class HoleScript : MonoBehaviour
 {
     public TopDownGlobalScript logic;
-    public float holeRadius = 0.5f;
+    public float holeRadius = 2f;
     // Start is called before the first frame update
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<TopDownGlobalScript>();
-        if (logic.holeRadius != holeRadius)
-        {
-            holeRadius = logic.holeRadius;
-            transform.localScale = new Vector3(holeRadius, holeRadius, 1f);
-        }
+
+        holeRadius = logic.holeRadius;
+        print("since hole radius should be " + logic.holeRadius + " I will set myself to " + holeRadius);
+        transform.localScale = new Vector3(holeRadius, holeRadius, 1f);
+
     }
     // Update is called once per frame
     void Update()
