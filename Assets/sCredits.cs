@@ -21,6 +21,6 @@ public class sCredits : MonoBehaviour
     public void Back()
     {
         CreditsMenu.SetActive(false);
-        MainMenu.SetActive(false);
+        MainMenu.SetActive(true);
     }
 }
