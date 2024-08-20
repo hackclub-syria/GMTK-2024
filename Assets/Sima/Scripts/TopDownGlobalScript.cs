@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Dan.Main;
 using BayatGames.SaveGameFree;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class TopDownGlobalScript : MonoBehaviour
 {
@@ -39,11 +38,12 @@ public class TopDownGlobalScript : MonoBehaviour
     public float timerSus;
     public float naturalSusDecrease;
     public GameObject commentaryCanvas;
+    public Commentator_logic_script commentary;
+    public GameObject newHighScoreBox;
     // Start is called before the first frame update
     void Awake()
     {
         ballExists = false;
-        holeRadius = 0.5f;
         difficulty = prevDifficulty = 1;
         stats = GameObject.FindGameObjectWithTag("UI Manager").GetComponent<StatScreenScript>();
         timerSus = timeBetweenSusUpdate;
@@ -76,12 +76,18 @@ public class TopDownGlobalScript : MonoBehaviour
     public void NewRound()
     {
         roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
+        // if its a high score, display v_surprised
+        if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score")) {
+            print(int.Parse(roundNumberText.text) + "is greater than " + SaveGame.Load<int>("high score"));
+            commentary.V_surprise();
+            newHighScoreBox.SetActive(true);
+            Invoke("HideNewHigh", 1.5f);
+        }
+        scoreCountInThisRound[1] = 0;
+        scoreCountInThisRound[2] = 0;
         stats.ClearScoreBoard();
         ballCountInThisRound = 0;
-        for (int i = 1; i <= 2; i++)
-            for (int j = 0; j < 5; j++)
-                stats.scoresInThisRound[i, j] = -1;
-        scoreCountInThisRound[1] = scoreCountInThisRound[2] = 0;
+        stats.scoreInThisRound = 0;
         IncreaseDifficulty(1);
         StartCoroutine(RoundCompleteCor());
     }
@@ -92,6 +98,7 @@ public class TopDownGlobalScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1f;
         roundCompletePanel.SetActive(false);
+        stats.ClearScoreBoard();
     }
     public void IncreaseDifficulty(int increase)
     {
@@ -99,32 +106,58 @@ public class TopDownGlobalScript : MonoBehaviour
     }
     public GameObject gameOverPanel;
     public TextMeshProUGUI yourScoreIsText;
+
     public void UpdateScores(int team, bool scored)
     {
         if (scored)
         {
             scoreCountInThisRound[team]++;
         }
-        if (scoreCountInThisRound[1] == 5)
+        else
         {
-            gameOverPanel.SetActive(true);
-            // round has been won by dad :)
-            NewRound();
-
-        }
-        else if (scoreCountInThisRound[2] == 5)
-        {
-            GameOver();
+            if (team == 1)
+            {
+                scoreCountInThisRound[2]++;
+            }
+            else if (team == 2)
+            {
+                scoreCountInThisRound[1]++;
+            }
         }
         stats.UpdateScoreUI(team, scored);
+        if (Mathf.Abs(stats.scoreInThisRound) == 5) // someone won
+        {
+            if (stats.scoreInThisRound == 5)
+            {
+                // round has been won by dad :)
+                commentary.Surprise();
+                NewRound();
+            }
+            else
+            {
+                GameOver("round");
+            }
+            stats.scoreInThisRound = 0;
+        }
+
     }
 
     public void UpdateSus(float level)
     {
         stats.UpdateSusUI(level);
     }
-    public void GameOver()
+    public Image losingReasonImg;
+    public Sprite sussySprite, roundLostSprite;
+    public void GameOver(string reason)
     {
+        if (reason == "round")
+        {
+            losingReasonImg.sprite = roundLostSprite;
+        }
+        else
+        {
+            losingReasonImg.sprite = sussySprite;
+        }
         // GAME OVER
         Cursor.visible = true;
         Destroy(roundCompletePanel);
@@ -144,8 +177,12 @@ public class TopDownGlobalScript : MonoBehaviour
             SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
             Leaderboards.Leaderboard.UploadNewEntry(SaveGame.Load<string>("username"), SaveGame.Load<int>("high score"));
         }
-        // round has been won by opponent ;-;
         // stop spawning balls to prepare to exit
         ballExists = true;
+        Time.timeScale = 0;
+    }
+    void HideNewHigh()
+    {
+        newHighScoreBox.SetActive(false);
     }
 }

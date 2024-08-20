@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -89,7 +88,7 @@ public class Commentator_logic_script : MonoBehaviour
         }
     }
 
-    void Comment(string comment, State New_state = State.Idle)
+    public void Comment(string comment, State New_state = State.Idle)
     {
         Bubble.SetActive(true);
         Comment_text.SetText(comment);
@@ -97,19 +96,19 @@ public class Commentator_logic_script : MonoBehaviour
         timer = Comment_interval;
     }
     [ContextMenu("Surprise")]
-    void Surprise()
+    public void Surprise()
     {
         int Rand_ind = Random.Range(0, Surprised_comments.Length);
         Comment(Surprised_comments[Rand_ind], State.Surprised);
     }
     [ContextMenu("Very Surprise")]
-    void V_surprise()
+    public void V_surprise()
     {
         int Rand_ind = Random.Range(0, Surprised_comments.Length);
         Comment(Surprised_comments[Rand_ind], State.V_surprised);
     }
     [ContextMenu("Sus")]
-    void Suspect()
+    public void Suspect()
     {
         int Rand_ind = Random.Range(0, Sus_comments.Length);
         Comment(Sus_comments[Rand_ind], State.Sus);

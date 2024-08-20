@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallSpawnScript : MonoBehaviour
@@ -26,8 +24,6 @@ public class BallSpawnScript : MonoBehaviour
         int index = Random.Range(0, 4);
         float ballx = Random.Range(logic.corners[index].position.x, logic.corners[(index + 1) % 4].position.x);
         float bally = Random.Range(logic.corners[index].position.y, logic.corners[(index + 1) % 4].position.y);
-        if (logic.ballCountInThisRound < 10)
-        {
             GameObject newball = Instantiate(ball, new Vector3(ballx, bally, 0f), transform.rotation);
             logic.ballExists = true;
             logic.ballCountInThisRound++;
@@ -41,21 +37,5 @@ public class BallSpawnScript : MonoBehaviour
                 // opponent shot this ball   
                 newball.GetComponent<BallScript>().ballBelongsToTeam = 2;
             }
-        }
-        else
-        {
-            if (logic.scoreCountInThisRound[1] >= logic.scoreCountInThisRound[2])
-            {
-                // yay dad won
-                logic.roundsWon++;
-                logic.NewRound();
-            }
-            else
-            {
-                // oh no opp won
-                // stop spawning balls
-                logic.ballExists = true;
-            }
-        }
     }
 }
