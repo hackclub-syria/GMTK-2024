@@ -35,13 +35,13 @@ public class BallScript : MonoBehaviour
         ballMoveSpeed = logic.ballMoveSpeed;
         // if its outside range, destroy it and report
         transform.position += ballMoveSpeed * Time.deltaTime * dir;
-        if (transform.position.x > logic.corners[3].position.x || // Check right boundary
-            transform.position.x < logic.corners[0].position.x || // Check left boundary
-            transform.position.y > logic.corners[0].position.y || // Check top boundary
-            transform.position.y < logic.corners[1].position.y)   // Check bottom boundary
+        if (transform.position.x > logic.corners[3].position.x + 0.2|| // Check right boundary
+            transform.position.x < logic.corners[0].position.x - 0.2|| // Check left boundary
+            transform.position.y > logic.corners[0].position.y + 0.1|| // Check top boundary
+            transform.position.y < logic.corners[1].position.y - 0.1)// Check bottom boundary
         {
-            DestroyBall();
             logic.UpdateScores(ballBelongsToTeam, false);
+            DestroyBall();
         }
         // Make it white when it's in-range
         if (gameObject.GetComponent<SpriteRenderer>().color != Color.white

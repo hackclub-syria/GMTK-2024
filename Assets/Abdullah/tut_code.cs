@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class tut_code : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class tut_code : MonoBehaviour
                 gameObject.GetComponent<Image>().sprite = imgs[index];
                 gameObject.GetComponentInChildren<Text>().text = texts[index];
             }else{
+                SceneManager.LoadScene("game");
                 Destroy(this.gameObject);
             }
         } 

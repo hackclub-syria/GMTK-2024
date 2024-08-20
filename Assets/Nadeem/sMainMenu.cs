@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BayatGames.SaveGameFree;
+using UnityEngine.UI;
 
 public class sMainMenu : MonoBehaviour
 {
@@ -9,11 +9,25 @@ public class sMainMenu : MonoBehaviour
     public GameObject MainMenu;
     public GameObject OptionsMenu;
     public GameObject LeaderboardMenu;
+    public GameObject UsernamePanel;
 
+    private void Start()
+    {
+        if (!SaveGame.Exists("username")){
+            UsernamePanel.SetActive(true);
+        }
+    }
     // load next scene
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SaveGame.Exists("playedTutorial")){
+            SceneManager.LoadScene("game");
+        }
+        else
+        {
+            SaveGame.Save<bool>("playedTutorial", true);
+            SceneManager.LoadScene("tutorial");
+        }
     }
 
     // go to options menu
@@ -27,6 +41,12 @@ public class sMainMenu : MonoBehaviour
     {
         MainMenu.SetActive(false);
         LeaderboardMenu.SetActive(true);
+    }
+    public Text usernameText;
+    public void SaveUsername()
+    {
+        SaveGame.Save<string>("username", usernameText.text);
+        UsernamePanel.SetActive(false);
     }
 
     // quit game
