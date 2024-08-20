@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Dan.Main;
 using BayatGames.SaveGameFree;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class TopDownGlobalScript : MonoBehaviour
 {

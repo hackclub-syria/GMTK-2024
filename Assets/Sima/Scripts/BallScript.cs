@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
