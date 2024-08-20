@@ -890,18 +890,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceea6570910cc241bf49fef1190e5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreInThisRound: 0
   dadScoreSpots:
-  - {fileID: 238796793}
-  - {fileID: 1037012966}
-  - {fileID: 1314476222}
-  - {fileID: 232358383}
-  - {fileID: 432357462}
+  - {fileID: 238796795}
+  - {fileID: 1037012968}
+  - {fileID: 1314476224}
+  - {fileID: 232358385}
+  - {fileID: 432357464}
   joeScoreSpots:
-  - {fileID: 1778918346}
-  - {fileID: 1609369413}
-  - {fileID: 2016619155}
-  - {fileID: 1983845620}
-  - {fileID: 1441531805}
+  - {fileID: 1778918348}
+  - {fileID: 1609369415}
+  - {fileID: 2016619157}
+  - {fileID: 1983845622}
+  - {fileID: 1441531807}
   miss: {fileID: 21300000, guid: 9e7c367df8ccf6642a130b7882e2e008, type: 3}
   score: {fileID: 21300000, guid: 6bf7919456225364f8932951d77fadce, type: 3}
   blank: {fileID: 21300000, guid: cc41fda49d0f94348b1cf5625db6e727, type: 3}

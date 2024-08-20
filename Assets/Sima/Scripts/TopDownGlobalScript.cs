@@ -79,9 +79,7 @@ public class TopDownGlobalScript : MonoBehaviour
         scoreCountInThisRound[2] = 0;
         stats.ClearScoreBoard();
         ballCountInThisRound = 0;
-        for (int i = 1; i <= 2; i++)
-            for (int j = 0; j < 5; j++)
-                stats.scoresInThisRound[i, j] = -1;
+        stats.scoreInThisRound = 0;
         IncreaseDifficulty(1);
         StartCoroutine(RoundCompleteCor());
     }
@@ -100,17 +98,16 @@ public class TopDownGlobalScript : MonoBehaviour
     }
     public GameObject gameOverPanel;
     public TextMeshProUGUI yourScoreIsText;
-    public int ballsPlayed=0;
+
     public void UpdateScores(int team, bool scored)
     {
-        ballsPlayed++;
         if (scored)
         {
             scoreCountInThisRound[team]++;
         }
-        if (ballsPlayed == 10)
+        if (Mathf.Abs(stats.scoreInThisRound) == 5) // someone won
         {
-            if (scoreCountInThisRound[1] > scoreCountInThisRound[2])
+            if (stats.scoreInThisRound == 5)
             {
                 // round has been won by dad :)
                 NewRound();
@@ -119,7 +116,7 @@ public class TopDownGlobalScript : MonoBehaviour
             {
                 GameOver("round");
             }
-            ballsPlayed = 0;
+            stats.scoreInThisRound = 0;
         }
 
         stats.UpdateScoreUI(team, scored);

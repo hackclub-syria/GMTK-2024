@@ -6,14 +6,11 @@ using UnityEngine.UI;
 public class StatScreenScript : MonoBehaviour
 {
     private TopDownGlobalScript logic;
-    public int[,] scoresInThisRound = {
-        {-1, -1, -1 , -1, -1},
-        {-1, -1, -1 , -1, -1},
-        {-1, -1, -1 , -1, -1},
-    }; // first row is not actually used. ik bro ~zaid
+    public int scoreInThisRound = 0;
+    // first index is not actually used. ik bro ~zaid
 
-    public GameObject[] dadScoreSpots;
-    public GameObject[] joeScoreSpots;
+    public SpriteRenderer[] dadScoreSpots;
+    public SpriteRenderer[] joeScoreSpots;
 
     public Sprite miss, score, blank;
     public Slider susSlider;
@@ -28,48 +25,44 @@ public class StatScreenScript : MonoBehaviour
 
     public void UpdateScoreUI(int team, bool scored)
     {
-        for (int i = 0; i < 5; i++)
+        // Adjust the score based on which team and whether they scored
+        if (scored)
         {
-            if (scoresInThisRound[team, i] == -1)
-            {
-                if (scored)
-                {
-                    scoresInThisRound[team, i] = 1;
-                    if (team == 1)
-                    {
-                        dadScoreSpots[i].GetComponent<SpriteRenderer>().sprite = score;
-                    }
-                    else
-                    {
-                        joeScoreSpots[i].GetComponent<SpriteRenderer>().sprite = score;
-                    }
-                }
-                else
-                {
-                    scoresInThisRound[team, i] = 0;
-                    if (team == 1)
-                    {
-                        dadScoreSpots[i].GetComponent<SpriteRenderer>().sprite = miss;
-                    }
-                    else
-                    {
-                        joeScoreSpots[i].GetComponent<SpriteRenderer>().sprite = miss;
-                    }
-                }
+            if (team == 1) // Dad scored
+                scoreInThisRound = Mathf.Clamp(scoreInThisRound + 1, -5, 5);
+            else if (team == 2) // Joe scored
+                scoreInThisRound = Mathf.Clamp(scoreInThisRound - 1, -5, 5);
+        }
+        else
+        {
+            if (team == 1) // Dad missed
+                scoreInThisRound = Mathf.Clamp(scoreInThisRound - 1, -5, 5);
+            else if (team == 2) // Joe missed
+                scoreInThisRound = Mathf.Clamp(scoreInThisRound + 1, -5, 5);
+        }
 
-                break;
-            }
+        // Update Dad's score points
+        for (int i = 0; i < dadScoreSpots.Length; i++)
+        {
+            if (i < scoreInThisRound) // Positive score indicates Dad's points
+                dadScoreSpots[i].sprite = score;
+            else
+                dadScoreSpots[i].sprite = blank;
+        }
+
+        // Update Joe's score points
+        for (int i = 0; i < joeScoreSpots.Length; i++)
+        {
+            if (i < -scoreInThisRound) // Negative score indicates Joe's points
+                joeScoreSpots[i].sprite = score;
+            else
+                joeScoreSpots[i].sprite = blank;
         }
     }
     public TopDownGlobalScript logicManager;
     public void ClearScoreBoard()
     {
-        logicManager.ballsPlayed = 0;
-        scoresInThisRound = new int[,] {
-            { -1, -1, -1 , -1, -1},
-        { -1, -1, -1 , -1, -1},
-        { -1, -1, -1 , -1, -1},
-    };
+        scoreInThisRound = 0;
         for (int i = 0; i < 5; i++)
         {
             dadScoreSpots[i].GetComponent<SpriteRenderer>().sprite = blank;
