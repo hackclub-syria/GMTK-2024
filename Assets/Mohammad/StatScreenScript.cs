@@ -21,6 +21,20 @@ public class StatScreenScript : MonoBehaviour
         ClearScoreBoard();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<TopDownGlobalScript>();
     }
+    public AudioLooper susLoopSound;
+    float updSusSoundTimer = 1, timeBetweenSusUpdate = 1;
+    private void Update()
+    {
+        if(updSusSoundTimer > 0)
+        {
+            updSusSoundTimer -= Time.deltaTime;
+        }
+        else
+        {
+            susLoopSound.PlayAudio(susSlider.value);
+            updSusSoundTimer = timeBetweenSusUpdate;
+        }
+    }
 
     public void UpdateScoreUI(int team, bool scored)
     {
