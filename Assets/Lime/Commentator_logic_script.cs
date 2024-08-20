@@ -1,4 +1,4 @@
-using System.Collections;
+
 using UnityEngine;
 using TMPro;
 
@@ -22,7 +22,7 @@ public class Commentator_logic_script : MonoBehaviour
         "GIE IT LALDY!",
         "GIVE IT A LASH, WILL YA!",
         "I'm both Irish an' Scottish, half beer, half whisky, an' all trouble!"
-    }; 
+    };
     private string[] Surprised_comments = new string[]
     {
         "Ma heid's mince, so it is!",
@@ -47,12 +47,12 @@ public class Commentator_logic_script : MonoBehaviour
 
 
     private float Comment_interval = 5f;
-    private float timer; 
+    private float timer;
 
     void Start()
     {
         Current_state = State.Idle;
-        timer = Comment_interval; 
+        timer = Comment_interval;
     }
 
     void Update()

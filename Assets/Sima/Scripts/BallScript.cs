@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
@@ -35,9 +30,9 @@ public class BallScript : MonoBehaviour
         ballMoveSpeed = logic.ballMoveSpeed;
         // if its outside range, destroy it and report
         transform.position += ballMoveSpeed * Time.deltaTime * dir;
-        if (transform.position.x > logic.corners[3].position.x + 0.2|| // Check right boundary
-            transform.position.x < logic.corners[0].position.x - 0.2|| // Check left boundary
-            transform.position.y > logic.corners[0].position.y + 0.1|| // Check top boundary
+        if (transform.position.x > logic.corners[3].position.x + 0.2 || // Check right boundary
+            transform.position.x < logic.corners[0].position.x - 0.2 || // Check left boundary
+            transform.position.y > logic.corners[0].position.y + 0.1 || // Check top boundary
             transform.position.y < logic.corners[1].position.y - 0.1)// Check bottom boundary
         {
             logic.UpdateScores(ballBelongsToTeam, false);

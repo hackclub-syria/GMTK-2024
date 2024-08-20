@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Dan.Main;
 using BayatGames.SaveGameFree;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class TopDownGlobalScript : MonoBehaviour
 {
@@ -55,8 +54,9 @@ public class TopDownGlobalScript : MonoBehaviour
         else
         {
             timerSus = timeBetweenSusUpdate;
-            if (susAmountToAdd > 0){
-                sus += susAmountToAdd* susIncreaseFactor;
+            if (susAmountToAdd > 0)
+            {
+                sus += susAmountToAdd * susIncreaseFactor;
             }
             else
             {
@@ -74,7 +74,7 @@ public class TopDownGlobalScript : MonoBehaviour
     public GameObject roundCompletePanel;
     public void NewRound()
     {
-        roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
+        roundNumberText.text = (int.Parse(roundNumberText.text) + 1).ToString();
         scoreCountInThisRound[1] = 0;
         scoreCountInThisRound[2] = 0;
         stats.ClearScoreBoard();

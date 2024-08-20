@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
+
 
 public class sGamePaused : MonoBehaviour
 {
@@ -28,9 +27,9 @@ public class sGamePaused : MonoBehaviour
                 pauseGame();
             }
         }
-        
+
     }
-    
+
     public void pauseGame()
     {
         pauseMenu.SetActive(true);
@@ -49,7 +48,7 @@ public class sGamePaused : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    
+
     public void restartGame()
     {
         SceneManager.LoadScene("game");

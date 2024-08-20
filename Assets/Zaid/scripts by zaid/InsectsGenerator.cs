@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class InsectsGenerator : MonoBehaviour
@@ -20,7 +19,7 @@ public class InsectsGenerator : MonoBehaviour
         else
         {
             timer = timeBetweenInsects;
-            int randomNum = Random.Range(0,2);
+            int randomNum = Random.Range(0, 2);
             if (randomNum == 0)
             {
                 GameObject insectGenerated = GameObject.Instantiate(insectPrefab, leftSpawnPoint);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,7 +75,7 @@ public class StatScreenScript : MonoBehaviour
         {
             logic.GameOver("sus");
         }
-        if(susSlider.value > 8)
+        if (susSlider.value > 8)
         {
             warning.SetActive(true);
         }

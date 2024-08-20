@@ -1,4 +1,3 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class CursorManager : MonoBehaviour
@@ -7,7 +6,7 @@ public class CursorManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
     public bool notParalyzed = true;
-    public bool isInsect=false;
+    public bool isInsect = false;
     public float minMovableGrass, maxMovableGrass;
     private GameObject clickableObject;
     private Vector2 initialCursorPos;
