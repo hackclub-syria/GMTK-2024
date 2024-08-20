@@ -69,6 +69,7 @@ public class TopDownGlobalScript : MonoBehaviour
         }
     }
 
+    public GameObject roundCompletePanel;
     public void NewRound()
     {
         roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
@@ -79,6 +80,15 @@ public class TopDownGlobalScript : MonoBehaviour
                 stats.scoresInThisRound[i, j] = -1;
         scoreCountInThisRound[1] = scoreCountInThisRound[2] = 0;
         IncreaseDifficulty(1);
+        StartCoroutine(RoundCompleteCor());
+    }
+    private IEnumerator RoundCompleteCor()
+    {
+        Time.timeScale = 0f;
+        roundCompletePanel.SetActive(true);
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1f;
+        roundCompletePanel.SetActive(false);
     }
     public void IncreaseDifficulty(int increase)
     {
