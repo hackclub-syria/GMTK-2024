@@ -7,6 +7,7 @@ public class StatScreenScript : MonoBehaviour
 {
     private TopDownGlobalScript logic;
     public int scoreInThisRound = 0;
+    public Commentator_logic_script commentator;
     // first index is not actually used. ik bro ~zaid
 
     public SpriteRenderer[] dadScoreSpots;
@@ -70,12 +71,22 @@ public class StatScreenScript : MonoBehaviour
         }
     }
 
+    bool calledCommentator = false;
     public void UpdateSusUI(float level)
     {
         susSlider.value = Mathf.RoundToInt(level);
         if (susSlider.value == 11)
         {
             logic.GameOver("sus");
+        }
+        if (susSlider.value > 6)
+        {
+            if (!calledCommentator)
+            {
+                commentator.Suspect();
+                calledCommentator = true;
+                Invoke("delayedCommentary", 5.2f);
+            }
         }
         if(susSlider.value > 8)
         {
@@ -85,5 +96,9 @@ public class StatScreenScript : MonoBehaviour
         {
             warning.SetActive(false);
         }
+    }
+    void delayedCommentary()
+    {
+        calledCommentator = false;
     }
 }

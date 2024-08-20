@@ -39,6 +39,8 @@ public class TopDownGlobalScript : MonoBehaviour
     public float timerSus;
     public float naturalSusDecrease;
     public GameObject commentaryCanvas;
+    public Commentator_logic_script commentary;
+    public GameObject newHighScoreBox;
     // Start is called before the first frame update
     void Awake()
     {
@@ -75,6 +77,13 @@ public class TopDownGlobalScript : MonoBehaviour
     public void NewRound()
     {
         roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
+        // if its a high score, display v_surprised
+        if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score")) {
+            print(int.Parse(roundNumberText.text) + "is greater than " + SaveGame.Load<int>("high score"));
+            commentary.V_surprise();
+            newHighScoreBox.SetActive(true);
+            Invoke("HideNewHigh", 1.5f);
+        }
         scoreCountInThisRound[1] = 0;
         scoreCountInThisRound[2] = 0;
         stats.ClearScoreBoard();
@@ -105,11 +114,24 @@ public class TopDownGlobalScript : MonoBehaviour
         {
             scoreCountInThisRound[team]++;
         }
+        else
+        {
+            if (team == 1)
+            {
+                scoreCountInThisRound[2]++;
+            }
+            else if (team == 2)
+            {
+                scoreCountInThisRound[1]++;
+            }
+        }
+        stats.UpdateScoreUI(team, scored);
         if (Mathf.Abs(stats.scoreInThisRound) == 5) // someone won
         {
             if (stats.scoreInThisRound == 5)
             {
                 // round has been won by dad :)
+                commentary.Surprise();
                 NewRound();
             }
             else
@@ -119,7 +141,6 @@ public class TopDownGlobalScript : MonoBehaviour
             stats.scoreInThisRound = 0;
         }
 
-        stats.UpdateScoreUI(team, scored);
     }
 
     public void UpdateSus(float level)
@@ -160,5 +181,9 @@ public class TopDownGlobalScript : MonoBehaviour
         // stop spawning balls to prepare to exit
         ballExists = true;
         Time.timeScale = 0;
+    }
+    void HideNewHigh()
+    {
+        newHighScoreBox.SetActive(false);
     }
 }
