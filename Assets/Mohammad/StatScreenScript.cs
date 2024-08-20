@@ -77,7 +77,7 @@ public class StatScreenScript : MonoBehaviour
         susSlider.value = Mathf.RoundToInt(level);
         if (susSlider.value == 11)
         {
-            print("WTF SO SUSSSY BAKAAA");
+            logic.GameOver();
         }
     }
 }

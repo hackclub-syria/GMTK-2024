@@ -1,9 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+using Dan.Main;
+using BayatGames.SaveGameFree;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class TopDownGlobalScript : MonoBehaviour
 {
@@ -36,6 +38,7 @@ public class TopDownGlobalScript : MonoBehaviour
     public float susIncreaseFactor;
     public float timerSus;
     public float naturalSusDecrease;
+    public GameObject commentaryCanvas;
     // Start is called before the first frame update
     void Awake()
     {
@@ -94,6 +97,8 @@ public class TopDownGlobalScript : MonoBehaviour
     {
         difficulty = math.max(math.min(difficulty + increase, 10), 0);
     }
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI yourScoreIsText;
     public void UpdateScores(int team, bool scored)
     {
         if (scored)
@@ -102,16 +107,14 @@ public class TopDownGlobalScript : MonoBehaviour
         }
         if (scoreCountInThisRound[1] == 5)
         {
+            gameOverPanel.SetActive(true);
             // round has been won by dad :)
             NewRound();
+
         }
         else if (scoreCountInThisRound[2] == 5)
         {
-            // GAME OVER
-
-            // round has been won by opponent ;-;
-            // stop spawning balls to prepare to exit
-            ballExists = true;
+            GameOver();
         }
         stats.UpdateScoreUI(team, scored);
     }
@@ -119,5 +122,30 @@ public class TopDownGlobalScript : MonoBehaviour
     public void UpdateSus(float level)
     {
         stats.UpdateSusUI(level);
+    }
+    public void GameOver()
+    {
+        // GAME OVER
+        Cursor.visible = true;
+        Destroy(roundCompletePanel);
+        gameOverPanel.SetActive(true);
+        commentaryCanvas.SetActive(false);
+        yourScoreIsText.text = "Your score is: " + (int.Parse(roundNumberText.text).ToString());
+        if (SaveGame.Exists("high score"))
+        {
+            if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score"))
+            {
+                SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
+                Leaderboards.Leaderboard.UploadNewEntry(SaveGame.Load<string>("username"), SaveGame.Load<int>("high score"));
+            }
+        }
+        else
+        {
+            SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
+            Leaderboards.Leaderboard.UploadNewEntry(SaveGame.Load<string>("username"), SaveGame.Load<int>("high score"));
+        }
+        // round has been won by opponent ;-;
+        // stop spawning balls to prepare to exit
+        ballExists = true;
     }
 }

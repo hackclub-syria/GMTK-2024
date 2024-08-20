@@ -10,6 +10,11 @@ public class HoleScript : MonoBehaviour
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<TopDownGlobalScript>();
+        if (logic.holeRadius != holeRadius)
+        {
+            holeRadius = logic.holeRadius;
+            transform.localScale = new Vector3(holeRadius, holeRadius, 1f);
+        }
     }
     // Update is called once per frame
     void Update()
