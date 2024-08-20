@@ -32,8 +32,8 @@ public class HoleScript : MonoBehaviour
         {
             BallScript ballScript = collision.gameObject.GetComponent<BallScript>();
             logic.ballExists = false;
-            Destroy(collision.gameObject); // we should change this to: shrink then destroy
             logic.UpdateScores(ballScript.ballBelongsToTeam, true);
+            Destroy(collision.gameObject); // we should change this to: shrink then destroy
         }
     }
 

@@ -902,6 +902,7 @@ MonoBehaviour:
   blank: {fileID: 21300000, guid: cc41fda49d0f94348b1cf5625db6e727, type: 3}
   susSlider: {fileID: 120415477}
   warning: {fileID: 1619059477}
+  logicManager: {fileID: 1541370855}
 --- !u!1 &206733255
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,6 +4288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1071226575}
   - component: {fileID: 1071226576}
+  - component: {fileID: 1071226577}
   m_Layer: 5
   m_Name: round complete
   m_TagString: Untagged
@@ -4338,6 +4340,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1071226577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071226574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0da77ebcfbee1458b7ef1d518efe52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsManager: {fileID: 192805783}
 --- !u!1 &1098162230
 GameObject:
   m_ObjectHideFlags: 0

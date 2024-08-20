@@ -75,12 +75,13 @@ public class TopDownGlobalScript : MonoBehaviour
     public void NewRound()
     {
         roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
+        scoreCountInThisRound[1] = 0;
+        scoreCountInThisRound[2] = 0;
         stats.ClearScoreBoard();
         ballCountInThisRound = 0;
         for (int i = 1; i <= 2; i++)
             for (int j = 0; j < 5; j++)
                 stats.scoresInThisRound[i, j] = -1;
-        scoreCountInThisRound[1] = scoreCountInThisRound[2] = 0;
         IncreaseDifficulty(1);
         StartCoroutine(RoundCompleteCor());
     }
@@ -91,6 +92,7 @@ public class TopDownGlobalScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1f;
         roundCompletePanel.SetActive(false);
+        stats.ClearScoreBoard();
     }
     public void IncreaseDifficulty(int increase)
     {
@@ -98,15 +100,15 @@ public class TopDownGlobalScript : MonoBehaviour
     }
     public GameObject gameOverPanel;
     public TextMeshProUGUI yourScoreIsText;
-    public int ballsEnteredHole=0;
+    public int ballsPlayed=0;
     public void UpdateScores(int team, bool scored)
     {
-        ballsEnteredHole++;
+        ballsPlayed++;
         if (scored)
         {
             scoreCountInThisRound[team]++;
         }
-        if (ballsEnteredHole==10)
+        if (ballsPlayed == 10)
         {
             if (scoreCountInThisRound[1] > scoreCountInThisRound[2])
             {
@@ -117,7 +119,7 @@ public class TopDownGlobalScript : MonoBehaviour
             {
                 GameOver("round");
             }
-            ballsEnteredHole = 0;
+            ballsPlayed = 0;
         }
 
         stats.UpdateScoreUI(team, scored);

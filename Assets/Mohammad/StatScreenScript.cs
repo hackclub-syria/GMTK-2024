@@ -61,8 +61,10 @@ public class StatScreenScript : MonoBehaviour
             }
         }
     }
+    public TopDownGlobalScript logicManager;
     public void ClearScoreBoard()
     {
+        logicManager.ballsPlayed = 0;
         scoresInThisRound = new int[,] {
             { -1, -1, -1 , -1, -1},
         { -1, -1, -1 , -1, -1},
