@@ -9,6 +9,7 @@ public class sMainMenu : MonoBehaviour
     public GameObject MainMenu;
     public GameObject OptionsMenu;
     public GameObject LeaderboardMenu;
+    public GameObject CreditsMenu;
     public GameObject UsernamePanel;
 
     private void Start()
@@ -41,6 +42,11 @@ public class sMainMenu : MonoBehaviour
     {
         MainMenu.SetActive(false);
         LeaderboardMenu.SetActive(true);
+    }
+    public void ViewCredits()
+    {
+        MainMenu.SetActive(false);
+        CreditsMenu.SetActive(true);
     }
     public Text usernameText;
     public void SaveUsername()
