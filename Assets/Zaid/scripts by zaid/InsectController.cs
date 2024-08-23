@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InsectController : MonoBehaviour
 {
+    public GameManager cameraScript;
     public bool SpawnedLeft;
     public float speed;
     private SpriteRenderer sr;
@@ -14,6 +15,7 @@ public class InsectController : MonoBehaviour
     public float paralyzeInterval = 1.2f;
     private void Start()
     {
+        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<GameManager>();
         sr = GetComponent<SpriteRenderer>();
         if (!SpawnedLeft)
         {
@@ -56,7 +58,8 @@ public class InsectController : MonoBehaviour
             cursorLocked = true;
             cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             cursorPosition.z = 0;
-            Invoke("delay", paralyzeInterval);
+            cameraScript.shake = true;
+            Invoke(nameof(delay), paralyzeInterval);
             Destroy(gameObject, 1.4f);
         }
     }
