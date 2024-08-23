@@ -108,6 +108,7 @@ MonoBehaviour:
   speed: 0.5
   insectAnimator: {fileID: 8766398701783057484}
   dust: {fileID: 2877067272277696220, guid: 606762d0f689de04bbb88aba78f661a4, type: 3}
+  paralyzeInterval: 1.2
 --- !u!61 &3693899921348290952
 BoxCollider2D:
   m_ObjectHideFlags: 0

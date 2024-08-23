@@ -8,6 +8,10 @@ public class InsectController : MonoBehaviour
     private SpriteRenderer sr;
     public Animator insectAnimator;
     public GameObject dust;
+    private bool cursorLocked = false;
+    private Vector3 cursorPosition;
+    private float timer = 0;
+    public float paralyzeInterval = 1.2f;
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -18,6 +22,19 @@ public class InsectController : MonoBehaviour
     }
     private void Update()
     {
+        if (cursorLocked)
+        {
+            if (timer >= paralyzeInterval)
+            {
+                timer = 0;
+                cursorLocked = false;
+            }
+            else
+            {
+                GameObject.Find("cursor").transform.position = cursorPosition;
+                timer += Time.deltaTime;
+            }
+        }
         if (SpawnedLeft)
         {
             transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
@@ -36,7 +53,10 @@ public class InsectController : MonoBehaviour
             insectAnimator.CrossFade("BITE", 0f);
             GameObject.Find("player body").GetComponent<Animator>().CrossFade("OUCH", 0f); // f it shitty ass code
             GameObject.Find("cursor").GetComponent<CursorManager>().notParalyzed = false;
-            Invoke("delay", 1.2f);
+            cursorLocked = true;
+            cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            cursorPosition.z = 0;
+            Invoke("delay", paralyzeInterval);
             Destroy(gameObject, 1.4f);
         }
     }
