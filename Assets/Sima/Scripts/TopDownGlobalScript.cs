@@ -4,7 +4,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using Dan.Main;
-using BayatGames.SaveGameFree;
 
 public class TopDownGlobalScript : MonoBehaviour
 {
@@ -56,8 +55,9 @@ public class TopDownGlobalScript : MonoBehaviour
         else
         {
             timerSus = timeBetweenSusUpdate;
-            if (susAmountToAdd > 0){
-                sus += susAmountToAdd* susIncreaseFactor;
+            if (susAmountToAdd > 0)
+            {
+                sus += susAmountToAdd * susIncreaseFactor;
             }
             else
             {
@@ -89,24 +89,25 @@ public class TopDownGlobalScript : MonoBehaviour
     }
     public void NewRound()
     {
-        roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
+        roundNumberText.text = (int.Parse(roundNumberText.text) + 1).ToString();
         // if its a high score, display v_surprised
-        if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score")) {
+        if (int.Parse(roundNumberText.text) > PlayerPrefs.GetInt("high score"))
+        {
             commentary.V_surprise();
             newHighScoreBox.SetActive(true);
             Invoke("HideNewHigh", 1.5f);
-            if (SaveGame.Exists("high score"))
+            if (PlayerPrefs.HasKey("high score"))
             {
-                if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score"))
+                if (int.Parse(roundNumberText.text) > PlayerPrefs.GetInt("high score"))
                 {
-                    SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
-                    Leaderboards.Leaderboard.UploadNewEntry(LoadUsername(), SaveGame.Load<int>("high score"));
+                    PlayerPrefs.SetInt("high score", int.Parse(roundNumberText.text));
+                    Leaderboards.Leaderboard.UploadNewEntry(LoadUsername(), PlayerPrefs.GetInt("high score"));
                 }
             }
             else
             {
-                SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
-                Leaderboards.Leaderboard.UploadNewEntry(LoadUsername(), SaveGame.Load<int>("high score"));
+                PlayerPrefs.SetInt("high score", int.Parse(roundNumberText.text));
+                Leaderboards.Leaderboard.UploadNewEntry(LoadUsername(), PlayerPrefs.GetInt("high score"));
             }
         }
         scoreCountInThisRound[1] = 0;
@@ -190,18 +191,18 @@ public class TopDownGlobalScript : MonoBehaviour
         gameOverPanel.SetActive(true);
         commentaryCanvas.SetActive(false);
         yourScoreIsText.text = "Your score is: " + (int.Parse(roundNumberText.text).ToString());
-        if (SaveGame.Exists("high score"))
+        if (PlayerPrefs.HasKey("high score"))
         {
-            if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score"))
+            if (int.Parse(roundNumberText.text) > PlayerPrefs.GetInt("high score"))
             {
-                SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
-                Leaderboards.Leaderboard.UploadNewEntry(SaveGame.Load<string>("username"), SaveGame.Load<int>("high score"));
+                PlayerPrefs.SetInt("high score", int.Parse(roundNumberText.text));
+                Leaderboards.Leaderboard.UploadNewEntry(PlayerPrefs.GetString("username"), PlayerPrefs.GetInt("high score"));
             }
         }
         else
         {
-            SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
-            Leaderboards.Leaderboard.UploadNewEntry(SaveGame.Load<string>("username"), SaveGame.Load<int>("high score"));
+            PlayerPrefs.SetInt("high score", int.Parse(roundNumberText.text));
+            Leaderboards.Leaderboard.UploadNewEntry(PlayerPrefs.GetString("username"), PlayerPrefs.GetInt("high score"));
         }
         // stop spawning balls to prepare to exit
         ballExists = true;
