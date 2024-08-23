@@ -1,4 +1,3 @@
-using BayatGames.SaveGameFree;
 using UnityEngine;
 
 public class Deleter : MonoBehaviour
@@ -7,7 +6,7 @@ public class Deleter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            SaveGame.DeleteAll();
+            PlayerPrefs.DeleteAll();
         }
     }
 }
