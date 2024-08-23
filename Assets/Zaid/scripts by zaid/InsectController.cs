@@ -8,7 +8,7 @@ public class InsectController : MonoBehaviour
     public float speed;
     private SpriteRenderer sr;
     public Animator insectAnimator;
-    public GameObject dust;
+    public GameObject dust, Warning;
     private bool cursorLocked = false;
     private Vector3 cursorPosition;
     private float timer = 0;
@@ -53,6 +53,7 @@ public class InsectController : MonoBehaviour
         {
             speed = 0;
             insectAnimator.CrossFade("BITE", 0f);
+            Warning.SetActive(true);
             GameObject.Find("player body").GetComponent<Animator>().CrossFade("OUCH", 0f); // f it shitty ass code
             GameObject.Find("cursor").GetComponent<CursorManager>().notParalyzed = false;
             cursorLocked = true;
@@ -66,6 +67,7 @@ public class InsectController : MonoBehaviour
     private void delay()
     {
         GameObject.Find("cursor").GetComponent<CursorManager>().notParalyzed = true;
+        Warning.SetActive(false);
     }
     public void Killed()
     {
