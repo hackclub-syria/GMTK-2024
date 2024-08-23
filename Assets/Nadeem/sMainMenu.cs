@@ -48,11 +48,31 @@ public class sMainMenu : MonoBehaviour
         MainMenu.SetActive(false);
         CreditsMenu.SetActive(true);
     }
-    public Text usernameText;
+    public InputField usernameText;
     public void SaveUsername()
     {
-        SaveGame.Save<string>("username", usernameText.text);
+        SaveUsername(usernameText.text);
         UsernamePanel.SetActive(false);
+    }
+    public void SaveUsername(string username)
+    {
+        PlayerPrefs.SetString("uName", username);
+        PlayerPrefs.Save(); // Save the changes
+        Debug.Log("Username saved: " + username);
+    }
+    public string LoadUsername()
+    {
+        if (PlayerPrefs.HasKey("uName"))
+        {
+            string username = PlayerPrefs.GetString("uName");
+            Debug.Log("Username retrieved: " + username);
+            return username;
+        }
+        else
+        {
+            Debug.Log("No username found!");
+            return null;
+        }
     }
 
     // quit game
