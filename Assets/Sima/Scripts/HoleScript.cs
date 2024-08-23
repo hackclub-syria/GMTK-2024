@@ -25,7 +25,7 @@ public class HoleScript : MonoBehaviour
     }
     public GameObject sound;
     public AudioClip goodBol, badBol;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 2 && holeRadius >= logic.ballRadius)
         {

@@ -73,15 +73,41 @@ public class TopDownGlobalScript : MonoBehaviour
     }
 
     public GameObject roundCompletePanel;
+    public string LoadUsername()
+    {
+        if (PlayerPrefs.HasKey("uName"))
+        {
+            string username = PlayerPrefs.GetString("uName");
+            Debug.Log("Username retrieved: " + username);
+            return username;
+        }
+        else
+        {
+            Debug.Log("No username found!");
+            return null;
+        }
+    }
     public void NewRound()
     {
         roundNumberText.text = (int.Parse(roundNumberText.text)+1).ToString();
         // if its a high score, display v_surprised
         if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score")) {
-            print(int.Parse(roundNumberText.text) + "is greater than " + SaveGame.Load<int>("high score"));
             commentary.V_surprise();
             newHighScoreBox.SetActive(true);
             Invoke("HideNewHigh", 1.5f);
+            if (SaveGame.Exists("high score"))
+            {
+                if (int.Parse(roundNumberText.text) > SaveGame.Load<int>("high score"))
+                {
+                    SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
+                    Leaderboards.Leaderboard.UploadNewEntry(LoadUsername(), SaveGame.Load<int>("high score"));
+                }
+            }
+            else
+            {
+                SaveGame.Save<int>("high score", int.Parse(roundNumberText.text));
+                Leaderboards.Leaderboard.UploadNewEntry(LoadUsername(), SaveGame.Load<int>("high score"));
+            }
         }
         scoreCountInThisRound[1] = 0;
         scoreCountInThisRound[2] = 0;
