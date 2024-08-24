@@ -59,7 +59,7 @@ public class InsectController : MonoBehaviour
             cursorLocked = true;
             cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             cursorPosition.z = 0;
-            cameraScript.shake = true;
+            StartCoroutine(cameraScript.Shaking());
             Invoke(nameof(delay), paralyzeInterval);
             Destroy(gameObject, 1.4f);
         }
