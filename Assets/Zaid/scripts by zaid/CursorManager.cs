@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    public Sprite idleSprite, clickableSprite, pressingClickableSprite;
-    private SpriteRenderer spriteRenderer;
     private bool isClickable = false;
     public bool notParalyzed = true;
     public bool isInsect=false;
@@ -21,8 +19,6 @@ public class CursorManager : MonoBehaviour
     {
         movableGrassObj.transform.position = new Vector3((maxMovableGrass + minMovableGrass) / 2, movableGrassObj.transform.position.y, movableGrassObj.transform.position.z);
         Cursor.visible = false;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = idleSprite;
     }
 
     void Update()
@@ -46,8 +42,6 @@ public class CursorManager : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                spriteRenderer.sprite = pressingClickableSprite;
-
                 float deltaX = cursorPosition.x - initialCursorPos.x;
                 float newX = Mathf.Clamp(initialObjectPos.x + deltaX, minMovableGrass, maxMovableGrass);
 
@@ -56,24 +50,11 @@ public class CursorManager : MonoBehaviour
                 golfLogicManager.holeRadius = normalizedPosition * golfLogicManager.maxHoleRadius;
                 UpdateSusAmount(normalizedPosition);
             }
-            else
-            {
-                spriteRenderer.sprite = clickableSprite;
-            }
         }
-        else if (notParalyzed && isInsect)
+        else if (notParalyzed && isInsect && Input.GetMouseButtonDown(0))
         {
-            spriteRenderer.sprite = clickableSprite;
-            if (Input.GetMouseButtonDown(0))
-            {
-                spriteRenderer.sprite = idleSprite;
                 insectTouched.GetComponent<InsectController>().Killed();
                 PlaySound(squash);
-            }
-        }
-        else
-        {
-            spriteRenderer.sprite = idleSprite;
         }
     }
     public GameObject sfxObj;
