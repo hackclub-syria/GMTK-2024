@@ -1,4 +1,3 @@
-
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ public class CursorManager : MonoBehaviour
 {
     private bool isClickable = false;
     public bool notParalyzed = true;
-    public bool isInsect=false;
+    public bool isInsect = false;
     public float minMovableGrass, maxMovableGrass;
     private GameObject clickableObject;
     private Vector2 initialCursorPos;
@@ -15,6 +14,7 @@ public class CursorManager : MonoBehaviour
     private float normalizedPosition;
     public TopDownGlobalScript golfLogicManager;
     public GameObject movableGrassObj;
+
     void Start()
     {
         movableGrassObj.transform.position = new Vector3((maxMovableGrass + minMovableGrass) / 2, movableGrassObj.transform.position.y, movableGrassObj.transform.position.z);
@@ -29,34 +29,40 @@ public class CursorManager : MonoBehaviour
             return;
         }
         Cursor.visible = false;
-        Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = cursorPosition;
 
-        if (isClickable && notParalyzed && !isInsect)
+        if (Input.touchCount > 0)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                initialCursorPos = cursorPosition;
-                initialObjectPos = clickableObject.transform.position;
-            }
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            transform.position = touchPosition;
 
-            if (Input.GetMouseButton(0))
+            if (isClickable && notParalyzed && !isInsect)
             {
-                float deltaX = cursorPosition.x - initialCursorPos.x;
-                float newX = Mathf.Clamp(initialObjectPos.x + deltaX, minMovableGrass, maxMovableGrass);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    initialCursorPos = touchPosition;
+                    initialObjectPos = clickableObject.transform.position;
+                }
 
-                clickableObject.transform.position = new Vector2(newX, clickableObject.transform.position.y);
-                normalizedPosition = (newX - minMovableGrass) / (maxMovableGrass - minMovableGrass);
-                golfLogicManager.holeRadius = normalizedPosition * golfLogicManager.maxHoleRadius;
-                UpdateSusAmount(normalizedPosition);
+                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                {
+                    float deltaX = touchPosition.x - initialCursorPos.x;
+                    float newX = Mathf.Clamp(initialObjectPos.x + deltaX, minMovableGrass, maxMovableGrass);
+
+                    clickableObject.transform.position = new Vector2(newX, clickableObject.transform.position.y);
+                    normalizedPosition = (newX - minMovableGrass) / (maxMovableGrass - minMovableGrass);
+                    golfLogicManager.holeRadius = normalizedPosition * golfLogicManager.maxHoleRadius;
+                    UpdateSusAmount(normalizedPosition);
+                }
             }
-        }
-        else if (notParalyzed && isInsect && Input.GetMouseButtonDown(0))
-        {
+            else if (notParalyzed && isInsect && touch.phase == TouchPhase.Began)
+            {
                 insectTouched.GetComponent<InsectController>().Killed();
                 PlaySound(squash);
+            }
         }
     }
+
     public GameObject sfxObj;
     public AudioClip squash;
     public void PlaySound(AudioClip s)
@@ -66,6 +72,7 @@ public class CursorManager : MonoBehaviour
         _sound.GetComponent<AudioSource>().Play();
         Destroy(_sound, 5f);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Clickable"))
@@ -97,6 +104,7 @@ public class CursorManager : MonoBehaviour
             isInsect = false;
         }
     }
+
     public void UpdateSusAmount(float normalizedPosition)
     {
         if (normalizedPosition < 0.4f)
