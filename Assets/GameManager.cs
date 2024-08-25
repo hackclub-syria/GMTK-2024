@@ -14,15 +14,6 @@ public class GameManager : MonoBehaviour
         timer.SetActive(true);
         StartCoroutine(CountdownCor());
     }
-    // Update is called once per frame
-    void Update()
-    {
-        if (shake)
-        {
-            shake = false;
-            StartCoroutine(Shaking());
-        }
-    }
     private IEnumerator CountdownCor()
     {
         Time.timeScale = 0f;
@@ -30,7 +21,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         timer.SetActive(false);
     }
-    IEnumerator Shaking()
+    public IEnumerator Shaking()
     {
         startPos = transform.position;
         while (elapsedTime < shakeDuration)
