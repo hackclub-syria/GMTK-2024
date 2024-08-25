@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
     public GameObject timer;
     public AnimationCurve shakeCurve;
     public float shakeDuration;
-    public bool shake = false;
     private Vector3 startPos;
     private float elapsedTime = 0f;
     private void Start()
