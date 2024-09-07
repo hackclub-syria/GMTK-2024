@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class sGamePaused : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public AudioSource click;
     public bool gamePaused = false;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class sGamePaused : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            click.Play();
             if (gamePaused)
             {
                 resumeGame();
